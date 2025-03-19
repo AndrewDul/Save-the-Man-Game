@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Save The Man</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <script src="Hangman.js" defer></script>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Header section with game title -->
+      <header>
+        <h1>Save The Man</h1>
+        <p>
+          A classic word guessing game. Guess the word before the hangman is
+          fully drawn!
+        </p>
+      </header>
+
+      <!-- Category Selection -->
+      <div id="categorySelection">
+        <label for="category">Choose category:</label>
+        <select id="category">
+          <option value="all">All Categories</option>
+          <option value="animals">Animals</option>
+          <option value="colors">Colors</option>
+          <option value="food">Food</option>
+          <option value="actions">Actions</option>
+          <option value="transport">Transport</option>
+          <option value="kitchen">Kitchen</option>
+          <option value="work">Work</option>
+        </select>
+      </div>
+
+      <!-- Section for adding players and selecting the active player -->
+      <div id="players">
+        <input type="text" id="playerName" placeholder="Enter player name" />
+        <button id="addPlayer">Add Player</button>
+        <ul id="playerList"></ul>
+        <select id="activePlayer"></select>
+      </div>
+
+      <!-- Display the current active player -->
+      <div id="currentPlayer">
+        Current player: <span id="playerNameDisplay">-</span>
+      </div>
+
+      <!-- Display the selected category -->
+      <div id="categoryDisplay">Category: All</div>
+
+      <!-- The word display board -->
+      <div id="board"></div>
+
+      <!-- The gallows image (progress bar for the game) -->
+      <div id="gallows">
+        <img src="img/s0.jpg" alt="Gallows" />
+      </div>
+
+      <!-- Alphabet section - letters to choose from -->
+      <div id="alphabet"></div>
+
+      <!-- Section to guess the whole word -->
+      <div id="guessWord">
+        <input type="text" id="wordGuess" placeholder="Guess the whole word" />
+        <button id="submitGuess">Submit</button>
+      </div>
+
+      <!-- Scoreboard for tracking player scores -->
+      <div id="scoreboard">
+        <h2>Scoreboard</h2>
+        <ul id="scoreList"></ul>
+      </div>
+
+      <!-- Game rules with a toggle button -->
+      <div id="rules">
+        <h2>
+          Game Rules
+          <button id="toggleRules">+</button>
+        </h2>
+        <div id="rulesContent" style="display: none">
+          <p>- Players take turns guessing letters or the whole word.</p>
+          <p>
+            - Correct letter guesses earn 5 points, and the player continues
+            their turn.
+          </p>
+          <p>- Correct whole word guesses earn 10 points and win the game.</p>
+          <p>
+            - Incorrect guesses pass the turn to the next player and progress
+            the hangman.
+          </p>
+          <p>
+            - The game ends when the word is guessed or the hangman is fully
+            drawn (9 mistakes).
+          </p>
+        </div>
+      </div>
+
+      <!-- Continue Game Button -->
+      <button id="continueGame" style="display: none">Continue Game</button>
+
+      <!-- Audio elements for correct and incorrect guesses -->
+      <audio id="correctSound" src="yes.wav"></audio>
+      <audio id="wrongSound" src="no.wav"></audio>
+
+      <!-- Footer -->
+      <footer>
+        <p>Created by Andrzej Dul</p>
+      </footer>
+    </div>
+  </body>
+</html>
