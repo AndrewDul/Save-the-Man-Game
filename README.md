@@ -3,7 +3,7 @@
 A modern and responsive implementation of the classic Hangman game.
 Guess the hidden word before the man is fully drawn!
 
-    ✅ Live Demo: Save The Man
+    ✅ Live Demo: https://andrewdul.github.io/Save-the-Man-Game/
 
 🚀 How to Run the Game
 
