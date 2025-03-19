@@ -100,9 +100,19 @@
         </div>
       </div>
 
-      <!-- Continue Game Button -->
-      <button id="continueGame" style="display: none">Continue Game</button>
-
+      <div id="resultOverlay">
+        <div id="resultOverlay-content">
+          <p id="winMessage">
+            Congratulations! You've won additional 10 points!
+          </p>
+          <p id="loseMessage" style="display: none">
+            Sorry, you didn't save the man. Focus!
+          </p>
+          <button id="continueGameButton">Kontynuj grę</button>
+          <button id="playAgainButton">Graj od nowa</button>
+        </div>
+      </div>
+      <div id="starry-bg"></div>
       <!-- Audio elements for correct and incorrect guesses -->
       <audio id="correctSound" src="yes.wav"></audio>
       <audio id="wrongSound" src="no.wav"></audio>

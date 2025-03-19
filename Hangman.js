@@ -121,7 +121,6 @@ function getRandomWord() {
       : selectedCategory;
 
   displayCategory(categoryName);
-
   return word;
 }
 
@@ -136,7 +135,6 @@ const activePlayer = document.getElementById("activePlayer");
 const scoreList = document.getElementById("scoreList");
 const continueGameButton = document.getElementById("continueGame");
 const categoryDisplay = document.getElementById("categoryDisplay");
-
 const correctSound = new Audio("yes.wav");
 const wrongSound = new Audio("no.wav");
 
@@ -168,7 +166,6 @@ function initializeGame() {
   selectedWord = getRandomWord();
   guessedWord = Array(selectedWord.length).fill("_");
   mistakes = 0;
-
   board.textContent = guessedWord.join(" ");
   alphabet.innerHTML = "";
 
@@ -181,6 +178,8 @@ function initializeGame() {
   }
 
   updateScoreboard();
+  document.getElementById("resultOverlay").style.display = "none";
+  gallowsImage.src = "img/s0.jpg";
 }
 
 function handleGuess(letter, button) {
@@ -190,6 +189,7 @@ function handleGuess(letter, button) {
     selectedWord.split("").forEach((char, index) => {
       if (char === letter) guessedWord[index] = letter;
     });
+
     players[currentPlayerIndex].score += 5;
     button.classList.add("used");
     correctSound.play();
@@ -198,8 +198,6 @@ function handleGuess(letter, button) {
     gallowsImage.src = `img/s${mistakes}.jpg`;
     button.classList.add("wrong");
     wrongSound.play();
-
-    // 🔥 PRZEŁĄCZANIE GRACZA PO BŁĘDZIE
     nextPlayer();
   }
 
@@ -221,7 +219,7 @@ submitGuess.addEventListener("click", () => {
     mistakes++;
     gallowsImage.src = `img/s${mistakes}.jpg`;
     wrongSound.play();
-    nextPlayer(); // 🔥 PRZEŁĄCZANIE GRACZA PO BŁĘDZIE
+    nextPlayer();
   }
 
   wordGuess.value = "";
@@ -239,24 +237,23 @@ function checkGameEnd() {
 }
 
 function endGame(won) {
-  continueGameButton.style.display = "block";
-  continueGameButton.onclick = () => {
-    initializeGame();
-    continueGameButton.style.display = "none";
-  };
+  if (won) {
+    players[currentPlayerIndex].wins++;
+    document.getElementById("winMessage").style.display = "block";
+    document.getElementById("loseMessage").style.display = "none";
+  } else {
+    document.getElementById("winMessage").style.display = "none";
+    document.getElementById("loseMessage").style.display = "block";
+  }
 
-  alert(
-    won
-      ? "Congratulations! You've saved the man!"
-      : `Game over! The man is gone! The word was: ${selectedWord}`
-  );
+  document.getElementById("resultOverlay").style.display = "block";
 }
 
 function updateScoreboard() {
   scoreList.innerHTML = "";
   players.forEach((player) => {
     let li = document.createElement("li");
-    li.textContent = `${player.name}: ${player.score} points`;
+    li.textContent = `${player.name}: ${player.score} points, ${player.wins} wins`;
     scoreList.appendChild(li);
   });
 }
@@ -271,15 +268,12 @@ function nextPlayer() {
 
 document.getElementById("addPlayer").addEventListener("click", () => {
   const playerName = document.getElementById("playerName").value.trim();
-
   if (playerName && !players.find((p) => p.name === playerName)) {
-    players.push({ name: playerName, score: 0 });
-
+    players.push({ name: playerName, score: 0, wins: 0 });
     let option = document.createElement("option");
     option.value = playerName;
     option.textContent = playerName;
     activePlayer.appendChild(option);
-
     currentPlayerIndex = players.length - 1;
     activePlayer.value = playerName;
     playerNameDisplay.textContent = playerName;
@@ -299,4 +293,53 @@ document.getElementById("category").addEventListener("change", (e) => {
   initializeGame();
 });
 
+document.getElementById("continueGameButton").addEventListener("click", () => {
+  initializeGame();
+  document.getElementById("resultOverlay").style.display = "none";
+});
+
+document.getElementById("playAgainButton").addEventListener("click", () => {
+  players = [];
+  currentPlayerIndex = 0;
+  initializeGame();
+  document.getElementById("resultOverlay").style.display = "none";
+});
+
+// Generowanie gwiazd
+function createStarryBackground() {
+  const container = document.getElementById("starry-bg");
+  const starCount = 150;
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    // Losowa pozycja
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    // Losowy ruch
+    const duration = 25 + Math.random() * 15;
+    const delay = Math.random() * -30;
+
+    if (Math.random() > 0.5) {
+      star.style.animation = `moveX ${duration}s linear ${delay}s infinite`;
+    } else {
+      star.style.animation = `moveY ${duration}s linear ${delay}s infinite`;
+    }
+
+    // 10% szans na planetę
+    if (Math.random() < 0.1) {
+      star.className += " planet";
+      star.style.backgroundColor = Math.random() < 0.5 ? "#0099ff" : "#ff6600"; // Niebieski lub pomarańczowy
+    }
+
+    // 5% szans na księżyc
+    if (Math.random() < 0.05) {
+      star.className += " moon";
+    }
+
+    container.appendChild(star);
+  }
+}
+
+window.addEventListener("load", createStarryBackground);
 initializeGame();
