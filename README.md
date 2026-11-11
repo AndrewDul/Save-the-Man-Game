@@ -2,6 +2,8 @@
 
 Save the Man is a bilingual English–Polish word and sentence adventure. Guess letters or the complete answer before the rescue meter reaches nine mistakes.
 
+The visual theme is a vintage detective office: wooden desk, paper case files, evidence board, red thread, classified stamps and typewriter-style keys.
+
 ## Play
 
 **Live game:** [andrewdul.github.io/Save-the-Man-Game](https://andrewdul.github.io/Save-the-Man-Game/)
