@@ -1,345 +1,71 @@
-﻿const categories = {
-  animals: [
-    "dog",
-    "cat",
-    "elephant",
-    "giraffe",
-    "monkey",
-    "lion",
-    "tiger",
-    "bear",
-    "zebra",
-    "kangaroo",
-  ],
-  colors: [
-    "red",
-    "blue",
-    "green",
-    "yellow",
-    "purple",
-    "orange",
-    "pink",
-    "brown",
-    "black",
-    "white",
-  ],
-  food: [
-    "pizza",
-    "pasta",
-    "apple",
-    "banana",
-    "orange",
-    "sandwich",
-    "steak",
-    "cheese",
-    "burger",
-    "sushi",
-  ],
-  actions: [
-    "running",
-    "walking",
-    "jumping",
-    "singing",
-    "dancing",
-    "eating",
-    "drinking",
-    "sleeping",
-    "swimming",
-    "laughing",
-  ],
-  transport: [
-    "car",
-    "bus",
-    "bike",
-    "train",
-    "truck",
-    "scooter",
-    "motorcycle",
-    "airplane",
-    "ship",
-    "subway",
-  ],
-  kitchen: [
-    "knife",
-    "spoon",
-    "fork",
-    "plate",
-    "glass",
-    "pan",
-    "pot",
-    "oven",
-    "fridge",
-    "microwave",
-  ],
-  work: [
-    "office",
-    "computer",
-    "meeting",
-    "deadline",
-    "coffee",
-    "colleague",
-    "project",
-    "email",
-    "report",
-    "schedule",
-  ],
+const SAVE_KEY="saveTheManAdventureV2";
+const TEXT={
+en:{heroEyebrow:"Bilingual word adventure",save:"Save",theExplorer:"the explorer",oneWord:"one word at a time.",heroText:"Discover words and sentences in English and Polish, collect stars and rescue the explorer.",answerLanguage:"Answer language",switch:"Switch",continue:"Continue adventure",levelMap:"Level map",practice:"Category practice",practiceSub:"Choose exactly what to learn",shop:"Help shop",shopSub:"Hints and letter reveals",achievements:"Achievements",howToPlay:"How to play",rulesSub:"Words, sentences and rewards",campaign:"Campaign",chooseLevel:"Choose a level",level:"Level",rescueProgress:"Danger",reward:"Reward",difficulty:"Difficulty",easy:"Easy",medium:"Medium",hard:"Hard",word:"Word",sentence:"Sentence",hint:"Translation hint",revealLetter:"Reveal letter",shield:"Mistake shield",typeAnswer:"Type the full answer",check:"Check",settings:"Settings",interfaceLanguage:"Interface language",targetLanguage:"Answer language",sound:"Sounds",reducedMotion:"Reduced animations",english:"English",polish:"Polish",chapter:"Chapter",chapterProgress:"{done}/6 complete",locked:"Locked",stars:"Stars",coins:"Coins",next:"Next level",retry:"Try again",map:"Map",victory:"Explorer saved!",victoryText:"Excellent work. A new challenge is waiting.",defeat:"Mission failed",defeatText:"The answer was: {answer}",notEnough:"Not enough coins",selectSlot:"Choose any hidden letter position.",letterRevealed:"Letter revealed!",shieldReady:"Shield active — the next mistake is safe.",shieldMissing:"You do not own a shield.",hintShown:"Translation revealed.",alreadyRevealed:"That position is already visible.",correct:"Correct!",wrong:"Not this time",levelLocked:"Complete the previous level first.",category:"Category",all:"All categories",startPractice:"Start practice",buy:"Buy",owned:"Owned",letterPass:"Letter reveal pass",letterPassDesc:"Reveal any chosen letter without paying during a level.",hintPass:"Translation pass",hintPassDesc:"Show the exact translation for free.",shieldItem:"Safety shield",shieldDesc:"Cancel one incorrect guess.",shopIntro:"Spend coins earned from correct answers. Items stay for later levels.",achievementIntro:"Permanent milestones from your entire adventure.",rulesIntro:"Learn the rules and rescue the explorer.",rule1T:"Guess letters",rule1D:"Choose letters on the keyboard or type the complete answer.",rule2T:"Words and sentences",rule2D:"Later levels contain longer words, phrases and full sentences.",rule3T:"Ready letters",rule3D:"Some harder levels begin with selected letters already visible.",rule4T:"Earn rewards",rule4D:"Fewer mistakes mean more stars and coins.",rule5T:"Choose a letter",rule5D:"Buy a reveal, activate it and select any hidden position.",rule6T:"Two directions",rule6D:"Switch between answering in English and answering in Polish.",close:"Close",pause:"Paused",resume:"Resume",restart:"Restart level",leave:"Leave to map",reset:"Reset progress",resetConfirm:"Reset all saved progress?",prefilled:"{n} letters are already revealed",clue:"Clue",translation:"Translation",practiceMode:"Practice",dailyBonus:"Streak bonus +{n} coins",newAchievement:"Achievement unlocked: {name}",ach1:"First rescue",ach2:"Five rescues",ach3:"Campaign hero",ach4:"Word expert",ach5:"Sentence solver",ach6:"Perfect rescue",ach7:"Coin collector",ach8:"Polyglot",ach9:"Hint master",ach10:"Star commander",catEveryday:"Everyday life",catAnimals:"Animals & nature",catTravel:"Travel",catFood:"Food",catWork:"Work & technology",catPhrases:"Useful sentences",catMixed:"Mixed challenge"},
+pl:{heroEyebrow:"Dwujęzyczna przygoda słowna",save:"Uratuj",theExplorer:"podróżnika",oneWord:"jedno słowo naraz.",heroText:"Poznawaj słowa i zdania po angielsku oraz polsku, zbieraj gwiazdki i ratuj podróżnika.",answerLanguage:"Język odpowiedzi",switch:"Zmień",continue:"Kontynuuj przygodę",levelMap:"Mapa poziomów",practice:"Ćwiczenie kategorii",practiceSub:"Wybierz, czego chcesz się uczyć",shop:"Sklep pomocy",shopSub:"Podpowiedzi i odsłanianie liter",achievements:"Osiągnięcia",howToPlay:"Jak grać",rulesSub:"Słowa, zdania i nagrody",campaign:"Kampania",chooseLevel:"Wybierz poziom",level:"Poziom",rescueProgress:"Zagrożenie",reward:"Nagroda",difficulty:"Trudność",easy:"Łatwa",medium:"Średnia",hard:"Trudna",word:"Słowo",sentence:"Zdanie",hint:"Podpowiedź tłumaczenia",revealLetter:"Odsłoń literę",shield:"Tarcza błędu",typeAnswer:"Wpisz całą odpowiedź",check:"Sprawdź",settings:"Ustawienia",interfaceLanguage:"Język interfejsu",targetLanguage:"Język odpowiedzi",sound:"Dźwięki",reducedMotion:"Ograniczone animacje",english:"Angielski",polish:"Polski",chapter:"Rozdział",chapterProgress:"Ukończono {done}/6",locked:"Zablokowane",stars:"Gwiazdki",coins:"Monety",next:"Następny poziom",retry:"Spróbuj ponownie",map:"Mapa",victory:"Podróżnik uratowany!",victoryText:"Świetna robota. Czeka już nowe wyzwanie.",defeat:"Misja nieudana",defeatText:"Odpowiedź to: {answer}",notEnough:"Masz za mało monet",selectSlot:"Wybierz dowolne ukryte miejsce na literę.",letterRevealed:"Litera odsłonięta!",shieldReady:"Tarcza aktywna — następny błąd jest bezpieczny.",shieldMissing:"Nie masz tarczy.",hintShown:"Tłumaczenie zostało odsłonięte.",alreadyRevealed:"To miejsce jest już widoczne.",correct:"Dobrze!",wrong:"Tym razem nie",levelLocked:"Najpierw ukończ poprzedni poziom.",category:"Kategoria",all:"Wszystkie kategorie",startPractice:"Rozpocznij ćwiczenie",buy:"Kup",owned:"Posiadasz",letterPass:"Kupon odsłonięcia litery",letterPassDesc:"Odsłoń dowolną wybraną literę bez płacenia podczas poziomu.",hintPass:"Kupon tłumaczenia",hintPassDesc:"Pokaż dokładne tłumaczenie bez dodatkowej opłaty.",shieldItem:"Tarcza bezpieczeństwa",shieldDesc:"Anuluj jedną błędną odpowiedź.",shopIntro:"Wydawaj monety zdobyte za dobre odpowiedzi. Przedmioty zostają na późniejsze poziomy.",achievementIntro:"Stałe cele z całej Twojej przygody.",rulesIntro:"Poznaj zasady i uratuj podróżnika.",rule1T:"Odgaduj litery",rule1D:"Wybieraj litery z klawiatury albo wpisz całą odpowiedź.",rule2T:"Słowa i zdania",rule2D:"Późniejsze poziomy zawierają dłuższe słowa, zwroty i całe zdania.",rule3T:"Gotowe litery",rule3D:"Niektóre trudniejsze poziomy zaczynają się z już odsłoniętymi literami.",rule4T:"Zdobywaj nagrody",rule4D:"Mniej błędów oznacza więcej gwiazdek i monet.",rule5T:"Wybierz literę",rule5D:"Kup odsłonięcie, aktywuj je i wybierz dowolne ukryte miejsce.",rule6T:"Dwa kierunki",rule6D:"Przełączaj między odpowiedziami po angielsku i po polsku.",close:"Zamknij",pause:"Pauza",resume:"Wznów",restart:"Zacznij poziom od nowa",leave:"Wyjdź do mapy",reset:"Wyzeruj postęp",resetConfirm:"Wyzerować cały zapisany postęp?",prefilled:"{n} litery są już odsłonięte",clue:"Wskazówka",translation:"Tłumaczenie",practiceMode:"Ćwiczenie",dailyBonus:"Premia za serię +{n} monet",newAchievement:"Odblokowano osiągnięcie: {name}",ach1:"Pierwszy ratunek",ach2:"Pięć ratunków",ach3:"Bohater kampanii",ach4:"Znawca słów",ach5:"Pogromca zdań",ach6:"Idealny ratunek",ach7:"Kolekcjoner monet",ach8:"Poliglota",ach9:"Mistrz podpowiedzi",ach10:"Dowódca gwiazd",catEveryday:"Życie codzienne",catAnimals:"Zwierzęta i natura",catTravel:"Podróże",catFood:"Jedzenie",catWork:"Praca i technologia",catPhrases:"Przydatne zdania",catMixed:"Wyzwanie mieszane"}
 };
 
-let selectedCategory = "all";
+const ENTRIES=[
+{en:"house",pl:"dom",cat:"everyday",hEn:"A place where people live",hPl:"Miejsce, w którym mieszkają ludzie"},{en:"window",pl:"okno",cat:"everyday",hEn:"You can see outside through it",hPl:"Można przez nie patrzeć na zewnątrz"},{en:"family",pl:"rodzina",cat:"everyday",hEn:"Parents, children and relatives",hPl:"Rodzice, dzieci i krewni"},{en:"morning",pl:"poranek",cat:"everyday",hEn:"The beginning of the day",hPl:"Początek dnia"},{en:"friend",pl:"przyjaciel",cat:"everyday",hEn:"A person you like and trust",hPl:"Osoba, którą lubisz i której ufasz"},{en:"school",pl:"szkoła",cat:"everyday",hEn:"A place for learning",hPl:"Miejsce do nauki"},
+{en:"elephant",pl:"słoń",cat:"animals",hEn:"A huge animal with a trunk",hPl:"Wielkie zwierzę z trąbą"},{en:"butterfly",pl:"motyl",cat:"animals",hEn:"A colorful insect with wings",hPl:"Kolorowy owad ze skrzydłami"},{en:"forest",pl:"las",cat:"animals",hEn:"A large area full of trees",hPl:"Duży obszar pełen drzew"},{en:"dolphin",pl:"delfin",cat:"animals",hEn:"An intelligent sea mammal",hPl:"Inteligentny ssak morski"},{en:"mountain",pl:"góra",cat:"animals",hEn:"Very high land with a peak",hPl:"Wysoki teren ze szczytem"},{en:"rainbow",pl:"tęcza",cat:"animals",hEn:"Colors visible after rain",hPl:"Kolory widoczne po deszczu"},
+{en:"airport",pl:"lotnisko",cat:"travel",hEn:"Planes arrive and leave here",hPl:"Tutaj przylatują i odlatują samoloty"},{en:"suitcase",pl:"walizka",cat:"travel",hEn:"You pack clothes in it",hPl:"Pakujesz do niej ubrania"},{en:"journey",pl:"podróż",cat:"travel",hEn:"Travel from one place to another",hPl:"Przemieszczanie się z miejsca na miejsce"},{en:"ticket",pl:"bilet",cat:"travel",hEn:"It lets you enter or travel",hPl:"Pozwala wejść albo podróżować"},{en:"station",pl:"stacja",cat:"travel",hEn:"A train or bus stops here",hPl:"Zatrzymuje się tutaj pociąg lub autobus"},{en:"passport",pl:"paszport",cat:"travel",hEn:"A document for international travel",hPl:"Dokument do podróży zagranicznych"},
+{en:"I would like a cup of tea",pl:"Poproszę filiżankę herbaty",cat:"phrases",type:"sentence",hEn:"A polite café request",hPl:"Uprzejma prośba w kawiarni"},{en:"Where is the nearest station",pl:"Gdzie jest najbliższa stacja",cat:"phrases",type:"sentence",hEn:"A question about directions",hPl:"Pytanie o drogę"},{en:"The weather is beautiful today",pl:"Dzisiaj jest piękna pogoda",cat:"phrases",type:"sentence",hEn:"A positive comment about the day",hPl:"Pozytywny komentarz o dniu"},{en:"Can you help me please",pl:"Czy możesz mi pomóc",cat:"phrases",type:"sentence",hEn:"A polite request for help",hPl:"Uprzejma prośba o pomoc"},{en:"I am learning a new language",pl:"Uczę się nowego języka",cat:"phrases",type:"sentence",hEn:"A sentence about education",hPl:"Zdanie o nauce"},{en:"We are going home tomorrow",pl:"Jutro wracamy do domu",cat:"phrases",type:"sentence",hEn:"A plan for the next day",hPl:"Plan na następny dzień"},
+{en:"computer",pl:"komputer",cat:"work",hEn:"An electronic machine for data and programs",hPl:"Elektroniczne urządzenie do danych i programów"},{en:"keyboard",pl:"klawiatura",cat:"work",hEn:"You type letters with it",hPl:"Piszesz za jej pomocą"},{en:"meeting",pl:"spotkanie",cat:"work",hEn:"People gather to discuss something",hPl:"Ludzie zbierają się, aby coś omówić"},{en:"The project is ready for testing",pl:"Projekt jest gotowy do testów",cat:"work",type:"sentence",hEn:"A software status update",hPl:"Informacja o stanie oprogramowania"},{en:"Please send me the report",pl:"Proszę wyślij mi raport",cat:"work",type:"sentence",hEn:"A request for a work document",hPl:"Prośba o dokument z pracy"},{en:"Technology changes very quickly",pl:"Technologia zmienia się bardzo szybko",cat:"work",type:"sentence",hEn:"A statement about modern progress",hPl:"Zdanie o współczesnym postępie"},
+{en:"breakfast",pl:"śniadanie",cat:"food",hEn:"The first meal of the day",hPl:"Pierwszy posiłek dnia"},{en:"vegetable",pl:"warzywo",cat:"food",hEn:"A plant eaten as food",hPl:"Roślina spożywana jako jedzenie"},{en:"restaurant",pl:"restauracja",cat:"food",hEn:"A place where meals are served",hPl:"Miejsce, w którym podaje się posiłki"},{en:"The soup smells delicious",pl:"Zupa pachnie przepysznie",cat:"food",type:"sentence",hEn:"A compliment about a meal",hPl:"Komplement dotyczący posiłku"},{en:"I need two glasses of water",pl:"Potrzebuję dwóch szklanek wody",cat:"food",type:"sentence",hEn:"A request for drinks",hPl:"Prośba o napoje"},{en:"This cake is very sweet",pl:"To ciasto jest bardzo słodkie",cat:"food",type:"sentence",hEn:"A description of dessert",hPl:"Opis deseru"},
+{en:"adventure",pl:"przygoda",cat:"mixed",hEn:"An exciting and unusual experience",hPl:"Ekscytujące i niezwykłe przeżycie"},{en:"knowledge",pl:"wiedza",cat:"mixed",hEn:"Information and understanding",hPl:"Informacje i zrozumienie"},{en:"Never give up on your dreams",pl:"Nigdy nie rezygnuj ze swoich marzeń",cat:"mixed",type:"sentence",hEn:"An encouraging message",hPl:"Zachęcające przesłanie"},{en:"Small steps lead to big changes",pl:"Małe kroki prowadzą do wielkich zmian",cat:"mixed",type:"sentence",hEn:"Progress begins gradually",hPl:"Postęp zaczyna się stopniowo"},{en:"Practice makes everything easier",pl:"Ćwiczenie sprawia że wszystko jest łatwiejsze",cat:"mixed",type:"sentence",hEn:"Learning improves with repetition",hPl:"Nauka poprawia się dzięki powtarzaniu"},{en:"The best journey starts with courage",pl:"Najlepsza podróż zaczyna się od odwagi",cat:"mixed",type:"sentence",hEn:"A motivational travel thought",hPl:"Motywacyjna myśl o podróży"},
+{en:"apple",pl:"jabłko",cat:"food",hEn:"A round fruit that can be red or green",hPl:"Okrągły owoc, czerwony lub zielony"},{en:"cheese",pl:"ser",cat:"food",hEn:"A food made from milk",hPl:"Jedzenie wytwarzane z mleka"},{en:"bicycle",pl:"rower",cat:"travel",hEn:"A vehicle with two wheels and pedals",hPl:"Pojazd z dwoma kołami i pedałami"},{en:"ocean",pl:"ocean",cat:"animals",hEn:"A vast body of salt water",hPl:"Ogromny zbiornik słonej wody"},{en:"telephone",pl:"telefon",cat:"work",hEn:"A device used to call someone",hPl:"Urządzenie służące do dzwonienia"},{en:"weekend",pl:"weekend",cat:"everyday",hEn:"Saturday and Sunday",hPl:"Sobota i niedziela"},{en:"How much does this cost",pl:"Ile to kosztuje",cat:"phrases",type:"sentence",hEn:"A question asked in a shop",hPl:"Pytanie zadawane w sklepie"},{en:"I do not understand",pl:"Nie rozumiem",cat:"phrases",type:"sentence",hEn:"Useful when something is unclear",hPl:"Przydatne, gdy coś jest niejasne"},{en:"Could you speak more slowly",pl:"Czy możesz mówić wolniej",cat:"phrases",type:"sentence",hEn:"A language learner's request",hPl:"Prośba osoby uczącej się języka"},{en:"The train leaves at noon",pl:"Pociąg odjeżdża w południe",cat:"travel",type:"sentence",hEn:"Information about departure time",hPl:"Informacja o czasie odjazdu"},{en:"Our team solved the problem",pl:"Nasz zespół rozwiązał problem",cat:"work",type:"sentence",hEn:"A successful work result",hPl:"Udany wynik pracy"},{en:"Fresh fruit is good for you",pl:"Świeże owoce są dla ciebie dobre",cat:"food",type:"sentence",hEn:"Healthy eating advice",hPl:"Porada dotycząca zdrowego jedzenia"}
+];
 
-function getWordsByCategory(category) {
-  if (category === "all") {
-    return Object.values(categories).flat();
-  } else {
-    return categories[category];
-  }
-}
-
-let words = getWordsByCategory(selectedCategory);
-let usedWords = [];
-
-function shuffleWords(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-function getRandomWord() {
-  if (words.length === 0) {
-    words = getWordsByCategory(selectedCategory);
-    usedWords = [];
-    shuffleWords(words);
-  }
-
-  let word = words.shift();
-  usedWords.push(word);
-
-  let categoryName =
-    selectedCategory === "all"
-      ? Object.keys(categories).find((cat) => categories[cat].includes(word))
-      : selectedCategory;
-
-  displayCategory(categoryName);
-  return word;
-}
-
-// DOM elements
-const gallowsImage = document.querySelector("#gallows img");
-const board = document.getElementById("board");
-const alphabet = document.getElementById("alphabet");
-const wordGuess = document.getElementById("wordGuess");
-const submitGuess = document.getElementById("submitGuess");
-const playerNameDisplay = document.getElementById("playerNameDisplay");
-const activePlayer = document.getElementById("activePlayer");
-const scoreList = document.getElementById("scoreList");
-const continueGameButton = document.getElementById("continueGame");
-const categoryDisplay = document.getElementById("categoryDisplay");
-const correctSound = new Audio("yes.wav");
-const wrongSound = new Audio("no.wav");
-
-let selectedWord;
-let guessedWord;
-let mistakes = 0;
-let maxMistakes = 9;
-let players = [];
-let currentPlayerIndex = 0;
-
-function displayCategory(category) {
-  categoryDisplay.textContent = `Category: ${
-    category.charAt(0).toUpperCase() + category.slice(1)
-  }`;
-}
-
-// Toggle rules section
-const toggleRulesButton = document.getElementById("toggleRules");
-const rulesContent = document.getElementById("rulesContent");
-
-toggleRulesButton.addEventListener("click", () => {
-  rulesContent.style.display =
-    rulesContent.style.display === "none" ? "block" : "none";
-  toggleRulesButton.textContent =
-    rulesContent.style.display === "none" ? "+" : "-";
-});
-
-function initializeGame() {
-  selectedWord = getRandomWord();
-  guessedWord = Array(selectedWord.length).fill("_");
-  mistakes = 0;
-  board.textContent = guessedWord.join(" ");
-  alphabet.innerHTML = "";
-
-  for (let letter of "abcdefghijklmnopqrstuvwxyz") {
-    let button = document.createElement("button");
-    button.textContent = letter;
-    button.className = "letter";
-    button.addEventListener("click", () => handleGuess(letter, button));
-    alphabet.appendChild(button);
-  }
-
-  updateScoreboard();
-  document.getElementById("resultOverlay").style.display = "none";
-  gallowsImage.src = "img/s0.jpg";
-}
-
-function handleGuess(letter, button) {
-  if (!players.length || button.classList.contains("used")) return;
-
-  if (selectedWord.includes(letter)) {
-    selectedWord.split("").forEach((char, index) => {
-      if (char === letter) guessedWord[index] = letter;
-    });
-
-    players[currentPlayerIndex].score += 5;
-    button.classList.add("used");
-    correctSound.play();
-  } else {
-    mistakes++;
-    gallowsImage.src = `img/s${mistakes}.jpg`;
-    button.classList.add("wrong");
-    wrongSound.play();
-    nextPlayer();
-  }
-
-  button.disabled = true;
-  board.textContent = guessedWord.join(" ");
-  checkGameEnd();
-  updateScoreboard();
-}
-
-submitGuess.addEventListener("click", () => {
-  if (!players.length) return;
-
-  if (wordGuess.value.toLowerCase() === selectedWord) {
-    guessedWord = selectedWord.split("");
-    players[currentPlayerIndex].score += 10;
-    correctSound.play();
-    endGame(true);
-  } else {
-    mistakes++;
-    gallowsImage.src = `img/s${mistakes}.jpg`;
-    wrongSound.play();
-    nextPlayer();
-  }
-
-  wordGuess.value = "";
-  board.textContent = guessedWord.join(" ");
-  checkGameEnd();
-  updateScoreboard();
-});
-
-function checkGameEnd() {
-  if (!guessedWord.includes("_")) {
-    endGame(true);
-  } else if (mistakes >= maxMistakes) {
-    endGame(false);
-  }
-}
-
-function endGame(won) {
-  if (won) {
-    players[currentPlayerIndex].wins++;
-    document.getElementById("winMessage").style.display = "block";
-    document.getElementById("loseMessage").style.display = "none";
-  } else {
-    document.getElementById("winMessage").style.display = "none";
-    document.getElementById("loseMessage").style.display = "block";
-  }
-
-  document.getElementById("resultOverlay").style.display = "block";
-}
-
-function updateScoreboard() {
-  scoreList.innerHTML = "";
-  players.forEach((player) => {
-    let li = document.createElement("li");
-    li.textContent = `${player.name}: ${player.score} points, ${player.wins} wins`;
-    scoreList.appendChild(li);
-  });
-}
-
-function nextPlayer() {
-  if (players.length > 1) {
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-    activePlayer.value = players[currentPlayerIndex].name;
-    playerNameDisplay.textContent = players[currentPlayerIndex].name;
-  }
-}
-
-document.getElementById("addPlayer").addEventListener("click", () => {
-  const playerName = document.getElementById("playerName").value.trim();
-  if (playerName && !players.find((p) => p.name === playerName)) {
-    players.push({ name: playerName, score: 0, wins: 0 });
-    let option = document.createElement("option");
-    option.value = playerName;
-    option.textContent = playerName;
-    activePlayer.appendChild(option);
-    currentPlayerIndex = players.length - 1;
-    activePlayer.value = playerName;
-    playerNameDisplay.textContent = playerName;
-    updateScoreboard();
-  }
-});
-
-activePlayer.addEventListener("change", (e) => {
-  currentPlayerIndex = players.findIndex((p) => p.name === e.target.value);
-  playerNameDisplay.textContent = players[currentPlayerIndex].name;
-});
-
-document.getElementById("category").addEventListener("change", (e) => {
-  selectedCategory = e.target.value;
-  words = getWordsByCategory(selectedCategory);
-  shuffleWords(words);
-  initializeGame();
-});
-
-document.getElementById("continueGameButton").addEventListener("click", () => {
-  initializeGame();
-  document.getElementById("resultOverlay").style.display = "none";
-});
-
-document.getElementById("playAgainButton").addEventListener("click", () => {
-  players = [];
-  currentPlayerIndex = 0;
-  initializeGame();
-  document.getElementById("resultOverlay").style.display = "none";
-});
-
-// Generowanie gwiazd
-function createStarryBackground() {
-  const container = document.getElementById("starry-bg");
-  const starCount = 150;
-
-  for (let i = 0; i < starCount; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    // Losowa pozycja
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 100}%`;
-    // Losowy ruch
-    const duration = 25 + Math.random() * 15;
-    const delay = Math.random() * -30;
-
-    if (Math.random() > 0.5) {
-      star.style.animation = `moveX ${duration}s linear ${delay}s infinite`;
-    } else {
-      star.style.animation = `moveY ${duration}s linear ${delay}s infinite`;
-    }
-
-    // 10% szans na planetę
-    if (Math.random() < 0.1) {
-      star.className += " planet";
-      star.style.backgroundColor = Math.random() < 0.5 ? "#0099ff" : "#ff6600"; // Niebieski lub pomarańczowy
-    }
-
-    // 5% szans na księżyc
-    if (Math.random() < 0.05) {
-      star.className += " moon";
-    }
-
-    container.appendChild(star);
-  }
-}
-
-window.addEventListener("load", createStarryBackground);
-initializeGame();
+const CHAPTERS=[{key:"Everyday",icon:"🏡",indices:[0,1,2,3,4,5]},{key:"Animals",icon:"🌿",indices:[6,7,8,9,10,11]},{key:"Travel",icon:"✈️",indices:[12,13,14,15,16,17]},{key:"Phrases",icon:"💬",indices:[18,19,20,21,22,23]},{key:"Mixed",icon:"🚀",indices:[24,25,26,27,28,29]}];
+const CAMPAIGN=CHAPTERS.flatMap(c=>c.indices);
+const CATEGORY_INFO={everyday:["🏡","catEveryday"],animals:["🌿","catAnimals"],travel:["✈️","catTravel"],food:["🍎","catFood"],work:["💻","catWork"],phrases:["💬","catPhrases"],mixed:["🚀","catMixed"]};
+const defaultState=()=>({coins:50,stars:{},unlocked:1,streak:0,lastWin:null,inventory:{letter:1,hint:1,shield:1},settings:{ui:navigator.language?.startsWith("pl")?"pl":"en",target:"en",sound:true,reduced:false},achievements:{},stats:{wins:0,words:0,sentences:0,perfect:0,hints:0,spent:0,playedEn:0,playedPl:0}});
+let state=load(),game=null,activeChapter=Math.ceil(Math.min(state.unlocked,30)/6),practiceCategory=null;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function load(){try{const s=JSON.parse(localStorage.getItem(SAVE_KEY));if(!s)return defaultState();const d=defaultState();return{...d,...s,settings:{...d.settings,...s.settings},inventory:{...d.inventory,...s.inventory},stats:{...d.stats,...s.stats},stars:s.stars||{},achievements:s.achievements||{}}}catch{return defaultState()}}
+function save(){localStorage.setItem(SAVE_KEY,JSON.stringify(state))}function t(k,p={}){let v=TEXT[state.settings.ui]?.[k]??TEXT.en[k]??k;Object.entries(p).forEach(([a,b])=>v=v.replaceAll(`{${a}}`,b));return v}function norm(s){return s.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-ząćęłńóśźż0-9 ]/gi,"").replace(/\s+/g," ").trim()}function answerFor(e){return state.settings.target==="en"?e.en:e.pl}function otherFor(e){return state.settings.target==="en"?e.pl:e.en}function catLabel(cat){const i=CATEGORY_INFO[cat];return`${i?.[0]||"📚"} ${t(i?.[1]||"catMixed")}`}function totalStars(){return Object.values(state.stars).reduce((a,b)=>a+b,0)}
+function init(){makeSky();bind();applyLanguage();renderHeader();show("home");checkAchievements()}
+function bind(){$("#brandButton").onclick=()=>show("home");$("#continueButton").onclick=()=>startLevel(Math.min(state.unlocked,30));$("#mapButton").onclick=()=>show("map");$("[data-back='home']").onclick=()=>show("home");$("#settingsButton").onclick=openSettings;$("#switchModeButton").onclick=()=>{state.settings.target=state.settings.target==="en"?"pl":"en";save();applyLanguage()};$$('[data-open]').forEach(b=>b.onclick=()=>openNamed(b.dataset.open));$("#gameBackButton").onclick=openPause;$("#pauseButton").onclick=openPause;$("#hintButton").onclick=useHint;$("#revealButton").onclick=toggleReveal;$("#shieldButton").onclick=activateShield;$("#answerForm").onsubmit=e=>{e.preventDefault();submitFullAnswer()};window.addEventListener("keydown",physicalKey)}
+function applyLanguage(){document.documentElement.lang=state.settings.ui;document.body.classList.toggle("reduce-motion",state.settings.reduced);$$('[data-t]').forEach(n=>n.textContent=t(n.dataset.t));$$('[data-t-placeholder]').forEach(n=>n.placeholder=t(n.dataset.tPlaceholder));renderHeader();if($("#mapScreen").classList.contains("active"))renderMap();if(game)renderGame()}
+function renderHeader(){$("#coinCount").textContent=state.coins;$("#starCount").textContent=totalStars();$("#streakCount").textContent=state.streak;$("#modeFlag").textContent=state.settings.target==="en"?"🇬🇧":"🇵🇱";$("#modeText").textContent=t(state.settings.target==="en"?"english":"polish");$("#achievementSummary").textContent=`${Object.keys(state.achievements).length}/10`}
+function show(name){$$('.screen').forEach(s=>s.classList.remove('active'));$(`#${name}Screen`).classList.add('active');if(name==="map")renderMap();window.scrollTo({top:0,behavior:state.settings.reduced?"auto":"smooth"})}
+function renderMap(){const tabs=$("#chapterTabs"),grid=$("#levelGrid");tabs.innerHTML="";grid.innerHTML="";CHAPTERS.forEach((c,i)=>{const done=c.indices.filter((_,j)=>state.stars[i*6+j+1]).length,b=document.createElement('button');b.className=`chapter-tab ${activeChapter===i+1?'active':''}`;b.innerHTML=`<strong>${c.icon} ${t('chapter')} ${i+1}</strong><small>${t('chapterProgress',{done})}</small>`;b.onclick=()=>{activeChapter=i+1;renderMap()};tabs.appendChild(b)});const chapter=CHAPTERS[activeChapter-1];chapter.indices.forEach((entryIndex,j)=>{const level=(activeChapter-1)*6+j+1,entry=ENTRIES[entryIndex],locked=level>state.unlocked,stars=state.stars[level]||0,b=document.createElement('button');b.className=`level-card ${locked?'locked':''} ${level===state.unlocked?'current':''}`;b.innerHTML=`<span class="level-number">${locked?'🔒':level}</span><strong>${entry.type==='sentence'?t('sentence'):t('word')}</strong><small>${catLabel(entry.cat)}</small><small class="level-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</small>`;b.onclick=()=>locked?toast(t('levelLocked'),'bad'):startLevel(level);grid.appendChild(b)})}
+function startLevel(level){const entry=ENTRIES[CAMPAIGN[level-1]];if(!entry||level>state.unlocked)return;practiceCategory=null;beginGame(entry,level)}
+function startPractice(cat){practiceCategory=cat;const pool=cat==='all'?ENTRIES:ENTRIES.filter(e=>e.cat===cat);beginGame(pool[Math.floor(Math.random()*pool.length)],null)}
+function beginGame(entry,level){const answer=answerFor(entry),prefill=level?Math.min(3,Math.floor((level-1)/7)):1;game={entry,level,answer,revealed:new Set(),guessed:new Set(),mistakes:0,max:9,hint:false,revealMode:false,shield:false,ended:false,practice:!level};[...answer].forEach((char,i)=>{if(char===' '||!/[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(char))game.revealed.add(i)});const available=[...answer].map((c,i)=>/[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(c)?i:null).filter(i=>i!==null).sort(()=>Math.random()-.5);available.slice(0,prefill).forEach(i=>revealChar(answer[i]));show('game');renderGame()}
+function renderGame(){$("#gameCategory").textContent=catLabel(game.entry.cat);$("#gameLevel").textContent=game.level||t('practiceMode');$("#mistakesCount").textContent=game.mistakes;$("#gallowsImage").src=`img/s${Math.min(9,game.mistakes)}.jpg`;$("#mistakeTrack").innerHTML=Array.from({length:9},(_,i)=>`<i class="${i<game.mistakes?'hit':''}"></i>`).join('');const reward=calculateReward();$("#rewardPreview").textContent=`${reward} 🪙`;$("#difficultyText").textContent=t(game.answer.length<8?'easy':game.answer.length<18?'medium':'hard');$("#typeBadge").textContent=t(game.entry.type==='sentence'?'sentence':'word').toUpperCase();$("#categoryBadge").textContent=catLabel(game.entry.cat);$("#languageBadge").textContent=state.settings.target==='en'?'🇬🇧 EN':'🇵🇱 PL';$("#clueText").textContent=game.hint?`${t('translation')}: ${otherFor(game.entry)}`:(state.settings.ui==='pl'?game.entry.hPl:game.entry.hEn);$("#shieldOwned").textContent=game.shield?'✓':state.inventory.shield;renderPhrase();renderKeyboard();$("#revealButton").classList.toggle('active',game.revealMode)}
+function renderPhrase(){const board=$("#phraseBoard");board.innerHTML="";let group=document.createElement('span');group.className='word-group';[...game.answer].forEach((char,i)=>{if(char===' '){board.appendChild(group);group=document.createElement('span');group.className='word-group';return}const isLetter=/[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(char),visible=game.revealed.has(i),slot=document.createElement(isLetter?'button':'span');slot.className=`letter-slot ${visible?'revealed':''} ${!isLetter?'punctuation':''}`;slot.textContent=visible||!isLetter?char:'•';slot.dataset.index=i;if(isLetter&&!visible)slot.onclick=()=>revealAt(i);group.appendChild(slot)});board.appendChild(group)}
+function alphabet(){return state.settings.target==='pl'?'AĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUWYZŹŻ':'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+function renderKeyboard(){const k=$("#keyboard");k.innerHTML='';[...alphabet()].forEach(letter=>{const n=norm(letter),b=document.createElement('button');b.type='button';b.className=`key ${game.guessed.has(n)?(norm(game.answer).includes(n)?'correct':'wrong'):''}`;b.textContent=letter;b.disabled=game.guessed.has(n)||game.ended;b.onclick=()=>guessLetter(letter);k.appendChild(b)})}
+function revealChar(letter){const n=norm(letter);[...game.answer].forEach((c,i)=>{if(norm(c)===n)game.revealed.add(i)})}
+function guessLetter(letter){if(game.ended)return;const n=norm(letter);if(game.guessed.has(n))return;game.guessed.add(n);if(norm(game.answer).includes(n)){revealChar(letter);feedback(true);if(isSolved())win()}else{makeMistake()}renderGame()}
+function makeMistake(){if(game.shield){game.shield=false;toast(t('shieldReady'),'good')}else game.mistakes++;feedback(false);if(game.mistakes>=game.max)lose()}
+function feedback(correct){const frame=$('.image-frame');frame.classList.remove('correct','wrong');void frame.offsetWidth;frame.classList.add(correct?'correct':'wrong');if(state.settings.sound){const a=$(correct?'#correctSound':'#wrongSound');a.currentTime=0;a.play().catch(()=>{})}toast(t(correct?'correct':'wrong'),correct?'good':'bad')}
+function submitFullAnswer(){const value=$("#answerInput").value;$("#answerInput").value='';if(!value||game.ended)return;if(norm(value)===norm(game.answer)){[...game.answer].forEach((_,i)=>game.revealed.add(i));feedback(true);renderGame();win()}else makeMistake();renderGame()}
+function isSolved(){return[...game.answer].every((c,i)=>game.revealed.has(i)||c===' ')}
+function toggleReveal(){if(game.ended)return;if(!state.inventory.letter&&state.coins<15){toast(t('notEnough'),'bad');return}game.revealMode=!game.revealMode;toast(t('selectSlot'));renderGame()}
+function revealAt(index){if(!game.revealMode||game.revealed.has(index)||game.ended)return;if(state.inventory.letter>0)state.inventory.letter--;else state.coins-=15;revealChar(game.answer[index]);game.revealMode=false;state.stats.hints++;save();renderHeader();renderGame();toast(t('letterRevealed'),'good');if(isSolved())win()}
+function useHint(){if(game.hint||game.ended)return;if(state.inventory.hint>0)state.inventory.hint--;else if(state.coins>=10)state.coins-=10;else{toast(t('notEnough'),'bad');return}game.hint=true;state.stats.hints++;save();renderHeader();renderGame();toast(t('hintShown'),'good')}
+function activateShield(){if(game.shield||game.ended)return;if(!state.inventory.shield){toast(t('shieldMissing'),'bad');return}state.inventory.shield--;game.shield=true;save();renderGame();toast(t('shieldReady'),'good')}
+function calculateReward(){return Math.max(8,10+Math.min(24,game.answer.replaceAll(' ','').length)+(!game.practice?5:0)+(9-game.mistakes)*2)}
+function win(){if(game.ended)return;game.ended=true;const stars=game.mistakes<=1?3:game.mistakes<=4?2:1,reward=calculateReward();state.coins+=reward;state.stats.wins++;state.stats[game.entry.type==='sentence'?'sentences':'words']++;state.stats[state.settings.target==='en'?'playedEn':'playedPl']++;if(game.mistakes===0)state.stats.perfect++;updateStreak();if(game.level){state.stars[game.level]=Math.max(state.stars[game.level]||0,stars);if(game.level===state.unlocked&&state.unlocked<30)state.unlocked++}save();checkAchievements();renderHeader();coinBurst();setTimeout(()=>resultModal(true,stars,reward),400)}
+function lose(){if(game.ended)return;game.ended=true;state.streak=0;save();setTimeout(()=>resultModal(false,0,0),350)}
+function updateStreak(){const today=new Date().toISOString().slice(0,10),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);if(state.lastWin===today)return;if(state.lastWin===yesterday)state.streak++;else state.streak=1;state.lastWin=today;if(state.streak>1){const bonus=Math.min(20,state.streak*2);state.coins+=bonus;toast(t('dailyBonus',{n:bonus}),'good')}}
+function resultModal(won,stars,reward){const next=game.level&&game.level<30,lives=state.settings.ui==='pl'?'Pozostałe próby':'Lives',streak=state.settings.ui==='pl'?'Seria':'Streak';openModal(`<div class="modal result"><div class="result-icon">${won?'🧑‍🚀':'🌑'}</div><h2>${t(won?'victory':'defeat')}</h2><p>${won?t('victoryText'):t('defeatText',{answer:game.answer})}</p>${won?`<div class="result-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</div><div class="result-stats"><span><b>+${reward}</b><small>${t('coins')}</small></span><span><b>${9-game.mistakes}</b><small>${lives}</small></span><span><b>${state.streak}</b><small>🔥 ${streak}</small></span></div>`:''}<div class="modal-actions"><button class="secondary-button" data-result="map">${t('map')}</button><button class="primary-button" data-result="${won&&next?'next':'retry'}">${t(won&&next?'next':'retry')}</button></div></div>`,false);$$('[data-result]').forEach(b=>b.onclick=()=>{const a=b.dataset.result;closeModal();if(a==='map')show('map');else if(a==='next')startLevel(game.level+1);else game.practice?startPractice(practiceCategory||'all'):startLevel(game.level)})}
+const ACH=[['first','ach1',()=>state.stats.wins>=1],['five','ach2',()=>state.stats.wins>=5],['campaign','ach3',()=>state.stats.wins>=30],['words','ach4',()=>state.stats.words>=20],['sentences','ach5',()=>state.stats.sentences>=10],['perfect','ach6',()=>state.stats.perfect>=3],['coins','ach7',()=>state.coins>=200],['polyglot','ach8',()=>state.stats.playedEn>=3&&state.stats.playedPl>=3],['hints','ach9',()=>state.stats.hints>=10],['stars','ach10',()=>totalStars()>=50]];
+function checkAchievements(){ACH.forEach(([id,key,test])=>{if(!state.achievements[id]&&test()){state.achievements[id]=true;state.coins+=10;toast(t('newAchievement',{name:t(key)}),'good')}});save();renderHeader()}
+function openNamed(name){if(name==='shop')openShop();if(name==='achievements')openAchievements();if(name==='practice')openPractice();if(name==='rules')openRules()}
+function header(title,caption=''){return`<div class="modal-header"><div><h2>${title}</h2>${caption?`<p>${caption}</p>`:''}</div><button class="modal-close" aria-label="${t('close')}">✕</button></div>`}
+function openModal(html,closable=true){$('#modalRoot').innerHTML=html;if(closable)$('#modalRoot .modal-close')?.addEventListener('click',closeModal);$('#modalRoot').onclick=e=>{if(closable&&e.target===$('#modalRoot'))closeModal()}}
+function closeModal(){$('#modalRoot').innerHTML=''}
+function openShop(){const items=[['letter','🔎','letterPass','letterPassDesc',12],['hint','💡','hintPass','hintPassDesc',9],['shield','🛡️','shieldItem','shieldDesc',20]];openModal(`<div class="modal wide">${header(t('shop'),t('shopIntro'))}<div class="shop-grid">${items.map(([id,icon,name,desc,price])=>`<div class="shop-card"><span>${icon}</span><div><h3>${t(name)}</h3><p>${t(desc)}</p></div><button data-buy="${id}">${t('buy')} · ${price} 🪙 (${t('owned')}: ${state.inventory[id]})</button></div>`).join('')}</div></div>`);$$('[data-buy]').forEach(b=>b.onclick=()=>{const prices={letter:12,hint:9,shield:20},id=b.dataset.buy;if(state.coins<prices[id]){toast(t('notEnough'),'bad');return}state.coins-=prices[id];state.inventory[id]++;state.stats.spent+=prices[id];save();renderHeader();openShop()})}
+function openAchievements(){checkAchievements();const icons=['🚀','🧭','👑','🔤','💬','✨','🪙','🌍','💡','⭐'],unlocked=state.settings.ui==='pl'?'Odblokowane':'Unlocked';openModal(`<div class="modal wide">${header(t('achievements'),t('achievementIntro'))}<div class="achievement-grid">${ACH.map(([id,key],i)=>`<div class="achievement-card ${state.achievements[id]?'':'locked'}"><span>${icons[i]}</span><div><strong>${t(key)}</strong><small>${state.achievements[id]?unlocked:t('locked')}</small></div></div>`).join('')}</div></div>`)}
+function openPractice(){const cats=['all',...Object.keys(CATEGORY_INFO)];openModal(`<div class="modal wide">${header(t('practice'),t('practiceSub'))}<div class="practice-grid">${cats.map(cat=>`<button class="practice-card" data-practice="${cat}"><span>${cat==='all'?'🎲':CATEGORY_INFO[cat][0]}</span><strong>${cat==='all'?t('all'):t(CATEGORY_INFO[cat][1])}</strong><small>${t('startPractice')}</small></button>`).join('')}</div></div>`);$$('[data-practice]').forEach(b=>b.onclick=()=>{closeModal();startPractice(b.dataset.practice)})}
+function openRules(){const rules=[['🔤','rule1'],['💬','rule2'],['🔓','rule3'],['⭐','rule4'],['🔎','rule5'],['🌍','rule6']];openModal(`<div class="modal wide">${header(t('howToPlay'),t('rulesIntro'))}<div class="rules-grid">${rules.map(([i,k])=>`<div class="rule-card"><span>${i}</span><div><h3>${t(k+'T')}</h3><p>${t(k+'D')}</p></div></div>`).join('')}</div></div>`)}
+function openSettings(){openModal(`<div class="modal">${header(t('settings'))}<div class="settings-list"><label class="setting-row"><span>${t('interfaceLanguage')}</span><select id="uiSelect"><option value="pl" ${state.settings.ui==='pl'?'selected':''}>Polski</option><option value="en" ${state.settings.ui==='en'?'selected':''}>English</option></select></label><label class="setting-row"><span>${t('targetLanguage')}</span><select id="targetSelect"><option value="en" ${state.settings.target==='en'?'selected':''}>English</option><option value="pl" ${state.settings.target==='pl'?'selected':''}>Polski</option></select></label>${toggleRow('sound',state.settings.sound)}${toggleRow('reducedMotion',state.settings.reduced,'reduced')}</div><div class="modal-actions"><button id="rulesInSettings" class="secondary-button">${t('howToPlay')}</button><button id="resetButton" class="secondary-button">${t('reset')}</button></div></div>`);$('#uiSelect').onchange=e=>{state.settings.ui=e.target.value;save();applyLanguage();openSettings()};$('#targetSelect').onchange=e=>{state.settings.target=e.target.value;save();closeModal();applyLanguage();if(game)game.practice?startPractice(practiceCategory||'all'):startLevel(game.level);else openSettings()};$$('[data-setting]').forEach(b=>b.onclick=()=>{const key=b.dataset.setting;state.settings[key]=!state.settings[key];save();applyLanguage();openSettings()});$('#rulesInSettings').onclick=openRules;$('#resetButton').onclick=()=>{if(confirm(t('resetConfirm'))){localStorage.removeItem(SAVE_KEY);state=defaultState();save();closeModal();applyLanguage();show('home')}}}
+function toggleRow(label,on,key=label){return`<div class="setting-row"><span>${t(label)}</span><button class="switch ${on?'on':''}" data-setting="${key}" aria-pressed="${on}"></button></div>`}
+function openPause(){if(!game)return;openModal(`<div class="modal result">${header(t('pause'))}<div class="modal-actions"><button class="secondary-button" data-pause="map">${t('leave')}</button><button class="secondary-button" data-pause="restart">${t('restart')}</button><button class="primary-button" data-pause="resume">${t('resume')}</button></div></div>`);$$('[data-pause]').forEach(b=>b.onclick=()=>{const a=b.dataset.pause;closeModal();if(a==='map')show('map');if(a==='restart')game.practice?startPractice(practiceCategory||'all'):startLevel(game.level)})}
+function physicalKey(e){if(!$('#gameScreen').classList.contains('active')||game?.ended||document.activeElement===$('#answerInput'))return;if(e.key.length===1&&/[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(e.key))guessLetter(e.key)}
+function toast(msg,type=''){const e=document.createElement('div');e.className=`toast ${type}`;e.textContent=msg;$('#toastRoot').appendChild(e);setTimeout(()=>e.remove(),3000)}
+function coinBurst(){const r=$('#coinCount').getBoundingClientRect();for(let i=0;i<9;i++){const c=document.createElement('span');c.className='coin-fx';c.textContent='🪙';c.style.left=`${innerWidth/2}px`;c.style.top=`${innerHeight/2}px`;c.style.setProperty('--x',`${r.left-innerWidth/2+(Math.random()-.5)*90}px`);$('#effects').appendChild(c);setTimeout(()=>c.remove(),1000)}}
+function makeSky(){for(let i=0;i<28;i++){const s=document.createElement('i');s.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;border-radius:50%;background:white;opacity:${.15+Math.random()*.5};box-shadow:0 0 7px white`;$('#sky').appendChild(s)}}
+init();

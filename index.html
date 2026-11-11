@@ -2,125 +2,91 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Save The Man</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Inconsolata:400,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#10172c" />
+    <meta name="description" content="Save the Man — a bilingual word and sentence adventure in Polish and English." />
+    <title>Save the Man</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <script src="Hangman.js" defer></script>
   </head>
   <body>
-    <div id="container">
-      <!-- Header section with game title -->
-      <header>
-        <h1>Save The Man</h1>
-        <p>
-          A classic word guessing game. Guess the word before the hangman is
-          fully drawn!
-        </p>
+    <div id="sky" aria-hidden="true"></div>
+    <div class="app-shell">
+      <header class="topbar panel">
+        <button id="brandButton" class="brand" aria-label="Save the Man home"><span class="brand-mark">🪂</span><span>Save the Man</span></button>
+        <div class="resources">
+          <span class="resource"><b>🪙</b><strong id="coinCount">0</strong></span>
+          <span class="resource"><b>⭐</b><strong id="starCount">0</strong></span>
+          <span class="resource streak"><b>🔥</b><strong id="streakCount">0</strong></span>
+        </div>
+        <button id="settingsButton" class="icon-button" aria-label="Settings">⚙️</button>
       </header>
 
-      <!-- Category Selection -->
-      <div id="categorySelection">
-        <label for="category">Choose category:</label>
-        <select id="category">
-          <option value="all">All Categories</option>
-          <option value="animals">Animals</option>
-          <option value="colors">Colors</option>
-          <option value="food">Food</option>
-          <option value="actions">Actions</option>
-          <option value="transport">Transport</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="work">Work</option>
-        </select>
-      </div>
+      <main>
+        <section id="homeScreen" class="screen active">
+          <div class="hero panel">
+            <div class="hero-copy">
+              <span class="eyebrow" data-t="heroEyebrow">Bilingual word adventure</span>
+              <h1><span data-t="save">Save</span> <em data-t="theExplorer">the explorer</em><br /><span data-t="oneWord">one word at a time.</span></h1>
+              <p data-t="heroText">Discover words and sentences in English and Polish, collect stars and rescue the explorer.</p>
+              <div class="mode-card"><span id="modeFlag">🇬🇧</span><div><small data-t="answerLanguage">Answer language</small><strong id="modeText">English</strong></div><button id="switchModeButton" data-t="switch">Switch</button></div>
+              <div class="hero-actions">
+                <button id="continueButton" class="primary-button"><span data-t="continue">Continue adventure</span><b>›</b></button>
+                <button id="mapButton" class="secondary-button" data-t="levelMap">Level map</button>
+              </div>
+            </div>
+            <div class="hero-scene" aria-hidden="true">
+              <div class="planet"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+              <div class="explorer">🧑‍🚀</div><span class="float-letter l1">A</span><span class="float-letter l2">Ą</span><span class="float-letter l3">W</span>
+            </div>
+          </div>
+          <div class="home-grid">
+            <button class="home-card panel" data-open="practice"><span class="card-icon blue">🎯</span><span><strong data-t="practice">Category practice</strong><small data-t="practiceSub">Choose exactly what to learn</small></span><b>›</b></button>
+            <button class="home-card panel" data-open="shop"><span class="card-icon gold">🛍️</span><span><strong data-t="shop">Help shop</strong><small data-t="shopSub">Hints and letter reveals</small></span><b>›</b></button>
+            <button class="home-card panel" data-open="achievements"><span class="card-icon purple">🏆</span><span><strong data-t="achievements">Achievements</strong><small id="achievementSummary">0/10</small></span><b>›</b></button>
+            <button class="home-card panel" data-open="rules"><span class="card-icon green">📖</span><span><strong data-t="howToPlay">How to play</strong><small data-t="rulesSub">Words, sentences and rewards</small></span><b>›</b></button>
+          </div>
+        </section>
 
-      <!-- Section for adding players and selecting the active player -->
-      <div id="players">
-        <input type="text" id="playerName" placeholder="Enter player name" />
-        <button id="addPlayer">Add Player</button>
-        <ul id="playerList"></ul>
-        <select id="activePlayer"></select>
-      </div>
+        <section id="mapScreen" class="screen">
+          <div class="section-heading"><button class="back-button" data-back="home">←</button><div><span class="eyebrow" data-t="campaign">Campaign</span><h2 data-t="chooseLevel">Choose a level</h2></div></div>
+          <div id="chapterTabs" class="chapter-tabs"></div>
+          <div id="levelGrid" class="level-grid"></div>
+        </section>
 
-      <!-- Display the current active player -->
-      <div id="currentPlayer">
-        Current player: <span id="playerNameDisplay">-</span>
-      </div>
+        <section id="gameScreen" class="screen">
+          <div class="game-heading"><button id="gameBackButton" class="back-button">←</button><div><small id="gameCategory">Animals</small><strong><span data-t="level">Level</span> <span id="gameLevel">1</span></strong></div><button id="pauseButton" class="icon-button">Ⅱ</button></div>
+          <div class="game-layout">
+            <aside class="rescue-card panel">
+              <div class="danger-header"><span data-t="rescueProgress">Rescue progress</span><strong><span id="mistakesCount">0</span>/9</strong></div>
+              <div class="image-frame"><img id="gallowsImage" src="img/s0.jpg" alt="Rescue progress" /><div class="scanline"></div></div>
+              <div class="mistake-track" id="mistakeTrack"></div>
+              <div class="level-meta"><span><small data-t="reward">Reward</small><b id="rewardPreview">20 🪙</b></span><span><small data-t="difficulty">Difficulty</small><b id="difficultyText">Easy</b></span></div>
+            </aside>
 
-      <!-- Display the selected category -->
-      <div id="categoryDisplay">Category: All</div>
-
-      <!-- The word display board -->
-      <div id="board"></div>
-
-      <!-- The gallows image (progress bar for the game) -->
-      <div id="gallows">
-        <img src="img/s0.jpg" alt="Gallows" />
-      </div>
-
-      <!-- Alphabet section - letters to choose from -->
-      <div id="alphabet"></div>
-
-      <!-- Section to guess the whole word -->
-      <div id="guessWord">
-        <input type="text" id="wordGuess" placeholder="Guess the whole word" />
-        <button id="submitGuess">Submit</button>
-      </div>
-
-      <!-- Scoreboard for tracking player scores -->
-      <div id="scoreboard">
-        <h2>Scoreboard</h2>
-        <ul id="scoreList"></ul>
-      </div>
-
-      <!-- Game rules with a toggle button -->
-      <div id="rules">
-        <h2>
-          Game Rules
-          <button id="toggleRules">+</button>
-        </h2>
-        <div id="rulesContent" style="display: none">
-          <p>- Players take turns guessing letters or the whole word.</p>
-          <p>
-            - Correct letter guesses earn 5 points, and the player continues
-            their turn.
-          </p>
-          <p>- Correct whole word guesses earn 10 points and win the game.</p>
-          <p>
-            - Incorrect guesses pass the turn to the next player and progress
-            the hangman.
-          </p>
-          <p>
-            - The game ends when the word is guessed or the hangman is fully
-            drawn (9 mistakes).
-          </p>
-        </div>
-      </div>
-
-      <div id="resultOverlay">
-        <div id="resultOverlay-content">
-          <p id="winMessage">
-            Congratulations! You've won additional 10 points!
-          </p>
-          <p id="loseMessage" style="display: none">
-            Sorry, you didn't save the man. Focus!
-          </p>
-          <button id="continueGameButton">Kontynuj grę</button>
-          <button id="playAgainButton">Graj od nowa</button>
-        </div>
-      </div>
-      <div id="starry-bg"></div>
-      <!-- Audio elements for correct and incorrect guesses -->
-      <audio id="correctSound" src="yes.wav"></audio>
-      <audio id="wrongSound" src="no.wav"></audio>
-
-      <!-- Footer -->
-      <footer>
-        <p>Created by Andrzej Dul</p>
-      </footer>
+            <section class="puzzle-card panel">
+              <div class="puzzle-top"><span id="typeBadge" class="type-badge">WORD</span><span id="categoryBadge">🐾 Animals</span><span id="languageBadge">🇬🇧 EN</span></div>
+              <p id="clueText" class="clue">Clue appears here</p>
+              <div id="phraseBoard" class="phrase-board" aria-live="polite"></div>
+              <div class="helper-row">
+                <button id="hintButton" class="helper-button"><span>💡</span><b data-t="hint">Hint</b><small>10 🪙</small></button>
+                <button id="revealButton" class="helper-button"><span>🔎</span><b data-t="revealLetter">Reveal letter</b><small>15 🪙</small></button>
+                <button id="shieldButton" class="helper-button"><span>🛡️</span><b data-t="shield">Mistake shield</b><small id="shieldOwned">0</small></button>
+              </div>
+              <div id="keyboard" class="keyboard" aria-label="On-screen keyboard"></div>
+              <form id="answerForm" class="answer-form"><input id="answerInput" autocomplete="off" data-t-placeholder="typeAnswer" placeholder="Type the full answer" /><button type="submit" data-t="check">Check</button></form>
+            </section>
+          </div>
+        </section>
+      </main>
     </div>
+    <div id="modalRoot" class="modal-root"></div>
+    <div id="toastRoot" class="toast-root" aria-live="polite"></div>
+    <div id="effects" aria-hidden="true"></div>
+    <audio id="correctSound" src="yes.wav" preload="auto"></audio>
+    <audio id="wrongSound" src="no.wav" preload="auto"></audio>
   </body>
 </html>

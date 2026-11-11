@@ -1,135 +1,51 @@
-🪓 Save The Man – Hangman Game
+# Save the Man 🪂
 
-A modern and responsive implementation of the classic Hangman game.
-Guess the hidden word before the man is fully drawn!
+Save the Man is a bilingual English–Polish word and sentence adventure. Guess letters or the complete answer before the rescue meter reaches nine mistakes.
 
-    ✅ Live Demo: https://andrewdul.github.io/Save-the-Man-Game/
+## Play
 
-🚀 How to Run the Game
+**Live game:** [andrewdul.github.io/Save-the-Man-Game](https://andrewdul.github.io/Save-the-Man-Game/)
 
-    Clone the repository:
+## Main features
 
-git clone https://github.com/AndrewDul/Save-the-Man-Game.git
+- 30 campaign levels in 5 chapters
+- words, useful phrases and complete sentences
+- English-answer and Polish-answer modes
+- independently selectable Polish or English interface
+- more than 50 bilingual word and sentence entries
+- categories including everyday life, animals, nature, travel, food, work, technology and phrases
+- selected letters already visible in later levels
+- touch-friendly on-screen English and Polish keyboards
+- full-answer input and physical keyboard support
+- coins, stars, daily streak and persistent progress
+- rewards based on answer length and remaining attempts
+- shop with letter-reveal passes, translation hints and mistake shields
+- choose any hidden position when revealing a letter
+- category practice mode outside the campaign
+- 10 achievements and animated win effects
+- responsive desktop and mobile layouts
+- sound and reduced-animation settings
 
-    Navigate to the project folder:
+## How to play
 
-cd Save-the-Man-Game
+Choose a letter from the on-screen keyboard or type the full answer. Correct letters are revealed everywhere they occur. An incorrect letter or answer advances the rescue danger meter, unless an active shield protects you.
 
-    Open index.html in your browser or use Live Server (if using VSCode):
+Earn up to three stars per level:
 
-code .
+- 3 stars: 0–1 mistakes
+- 2 stars: 2–4 mistakes
+- 1 star: 5–8 mistakes
 
-📂 Project Structure
+Coins can be spent on translation hints, shields or revealing a letter in any chosen hidden position. Progress is saved locally in the browser.
+
+## Run locally
+
+Serve the folder with any static HTTP server and open it in a browser:
 
 ```bash
-Save-the-Man-Game/
-├── img/                # Gallows images for game progress
-│   ├── s0.jpg
-│   ├── s1.jpg
-│   ├── s2.jpg
-│   └── ...
-├── index.html          # Main HTML file
-├── style.css           # Styling file (modern dark theme)
-├── Hangman.js          # JavaScript logic for game functionality
-├── yes.wav             # Correct answer sound
-├── no.wav              # Incorrect answer sound
-└── README.md           # Project documentation
+python -m http.server 4174
 ```
 
-🎯 Game Logic
-✅ Objective
+## Author
 
-    The goal of the game is to guess the hidden word before the man is completely drawn.
-
-✅ Game Rules
-
-    Players take turns guessing letters or the whole word.
-    Correct letter guesses award 5 points and allow the player to continue their turn.
-    Correct whole word guesses award 10 points and end the game.
-    Incorrect guesses increase the gallows state and pass the turn to the next player.
-    The game ends when:
-        The word is guessed correctly.
-        The player makes 9 incorrect guesses (resulting in the man being hanged).
-
-🧠 Game Logic – Code Overview
-
-1. Game Initialization
-
-   The game initializes when the page loads or after pressing "Continue" after a game.
-   A random word is selected based on the chosen category.
-   The word is hidden and represented as underscores (\_).
-
-2. Category Selection
-
-   Players can select a specific category or choose "All Categories."
-   The game will select a random word from the chosen category.
-
-3. Guessing a Letter
-
-   The player can guess one letter at a time.
-   If the letter exists in the word, it is revealed in the correct position(s).
-   If the letter does not exist, the gallows progress increases by 1 step.
-
-4. Guessing the Whole Word
-
-   If the player guesses the word correctly, they win the game.
-   If the guess is incorrect, the gallows progress increases by 1 step.
-
-5. End of Game
-
-   If the player guesses all letters correctly, they win.
-   If the gallows reaches the final state, the player loses.
-   The player can restart the game using the "Continue" button.
-
-🌟 Features
-
-✔️ Clean and modern dark theme
-✔️ Fully responsive (works on mobile and desktop)
-✔️ Custom category selection
-✔️ Real-time scoring
-✔️ Realistic sound effects
-✔️ Random word generation using Fisher-Yates algorithm
-✔️ Multi-player support
-✔️ Smooth UI transitions
-🎮 Controls
-Action Key/Button
-Guess a letter Click a letter
-Guess the whole word Type the word and press "Submit"
-Start new game Click "Continue"
-Change category Select category from dropdown
-🛠️ Technologies Used
-
-    HTML5 – Structure and UI
-    CSS3 – Styling and responsiveness
-    JavaScript – Game logic and interactivity
-
-🏆 Challenges & Solutions
-❌ Problem: Incorrect category assignment
-
-Solution: Fixed category identification logic to work correctly within the selected context.
-❌ Problem: Random word repetition
-
-Solution: Added a shuffle algorithm and stored used words to prevent repetition.
-❌ Problem: Incorrect player switch after wrong guess
-
-Solution: Improved player switching logic to ensure fairness.
-🚀 Future Improvements
-
-    Add more categories
-    Allow custom word lists
-    Add multiplayer mode with more players
-    Save high scores to local storage
-
-🤝 Contributing
-
-Feel free to contribute!
-
-    Fork the repo
-    Create a new branch (git checkout -b feature/your-feature)
-    Commit your changes (git commit -m "Add your feature")
-    Push to your branch (git push origin feature/your-feature)
-    Create a new Pull Request
-
-📄 License
-
-This project is licensed under the MIT License – feel free to modify and distribute!
+Created by [Andrew Dul](https://github.com/AndrewDul).
